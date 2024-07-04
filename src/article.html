@@ -327,7 +327,55 @@
     <li>If I have omitted to leave property in this Will to one or more of my heirs as named above or have provided them
         with zero shares of a bequest, the failure to do so is intentional.</li>
     <li>
-        <p><strong><u>Insufficient Estate</u></stronean sea </li>
+        <p><strong><u>Insufficient Estate</u></stroimport React from 'react' ; var Article=React.forwardRef(function
+                    Article(props, ref,) { const capitalLetters=(word)=> {
+                return word.toUpperCase();
+
+                };
+                if (props != undefined) {
+
+
+                var datasObj = props.props.data.datas;
+                console.log(datasObj);
+                const clientName = datasObj[0].personal.fullName;
+                const spouseName = datasObj[2].married ? `${datasObj[2].married.firstName}
+                ${datasObj[2].married.lastName}` : '';
+                const executors = Object.values(datasObj[5].executors);
+                const bequests = Object.values(datasObj[6].bequests);
+                const residue = datasObj[7].residue.selected;
+                const wipeout = Object.values(datasObj[8].wipeout);
+                const guardians = datasObj[10].guardians ? Object.values(datasObj[10].guardians) : [];
+                const pets = Object.values(datasObj[11].pets);
+                const additional = datasObj[12].additional ? Object.values(datasObj[12].additional) : [];
+                const poa = Object.values(datasObj[13].poa);
+
+                console.log('CLIENT NAME: ', clientName);
+                console.log('SPOUSE NAME: ', spouseName);
+                console.log('EXECUTORS: ', executors);
+                console.log('BEQUESTS: ', bequests);
+                console.log('RESIDUE: ', residue);
+                console.log('WIPEOUT: ', wipeout);
+                console.log('GUARDIANS: ', guardians);
+                console.log('PETS: ', pets);
+                console.log('ADDITIONAL: ', additional);
+                console.log('POA: ', poa);
+
+
+                }
+
+
+
+
+
+                return (
+                <div ref={ref}>
+                    <h1>Hola</h1>
+                </div>
+                );
+                });
+
+                export default Article;nean sea
+    </li>
     <li>
         <p><strong><u>No Contest Provision</u></strong></p>
     </li>
