@@ -3,27 +3,27 @@ import React from 'react';
 var Article = React.forwardRef(function Article(props, ref,) {
     const capitalLetters = (word) => {
         return word.toUpperCase();
-
     };
+
     if (props != undefined) {
 
 
         var datasObj = props.props.data.datas;
         var statusObject = Object.fromEntries(datasObj.map(item => Object.entries(item)[0]));
         var personal = statusObject.personal;
-        const isMarried = () => statusObject.marriedq.selection === "true";
-        const getSpouseInfo = () => statusObject.married;
-        const hasKids = () => statusObject.kidsq.selection === "true";
-        const getKids = () => Object.values(statusObject.kids);
-        const getRelatives = () => Object.values(statusObject.relatives);
-        const getExecutors = () => Object.values(statusObject.executors);
-        const getBequests = () => Object.values(statusObject.bequests).filter(item => typeof item === 'object');
-        const getResidueInfo = () => statusObject.residue;
-        const getWipeoutInfo = () => statusObject.wipeout;
-        const getGuardians = () => statusObject.guardians;
-        const getPets = () => Object.values(statusObject.pets);
-        const getAdditionalInfo = () => statusObject.additional;
-        const getPOAInfo = () => statusObject.poa;
+        var isMarried = statusObject.marriedq.selection === "true";
+        var spouseInfo = statusObject.married;
+        //var hasKids = statusObject.kidsq.selection === "true";
+        //var kids = Object.values(statusObject.kids);
+        //var relatives = Object.values(statusObject.relatives);
+        //var executors = Object.values(statusObject.executors);
+        //var bequests = Object.values(statusObject.bequests).filter(item => typeof item === 'object');
+        //var residueInfo = statusObject.residue;
+        //var wipeoutInfo = statusObject.wipeout;
+        //var guardians = statusObject.guardians;
+        //var pets = Object.values(statusObject.pets);
+        //var additionalInfo = statusObject.additional;
+        //var POAInfo = statusObject.poa;
 
 
     }
@@ -35,15 +35,18 @@ var Article = React.forwardRef(function Article(props, ref,) {
     return (
         <div ref={ref}>
             <><center ><strong>LAST WILL AND TESTAMENT OF {personal.fullName} </strong></center><p><br /><br />
-                I, { }  , presently of { }, Ontario, declare that this is my Last Will and
+                I, {personal.fullName}  , presently of {personal.city}, {personal.province}, declare that this is my Last Will and
                 Testament.<br /><br /></p><center><strong>I. PRELIMINARY DECLARATIONS</strong></center><p><strong><u>Prior Wills and Codicils</u></strong></p><ol>
                     <ol>
                         <li>I revoke all prior Wills and Codicils.</li>
                     </ol>
                 </ol><p><strong><u>Marital Status</u></strong></p><ol>
                     <ol>
-
-
+                        <li>
+                            {isMarried
+                                ? `I am married to ${spouseInfo.firstName} ${spouseInfo.middleName} (my "Spouse").`
+                                : "I am not married or in a common law relationship."}
+                        </li>
                     </ol>
                 </ol><p><strong><u>Current Children</u></strong></p><ol>
                     <ol>

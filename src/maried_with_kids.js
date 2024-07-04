@@ -19,7 +19,7 @@
         {
             "married": {
                 "firstName": "Maria",
-                "middleName": "Middle Name",
+                "middleName": "Mary",
                 "lastName": "Becerra",
                 "relative": "Spouse",
                 "email": "maria@email.com",
