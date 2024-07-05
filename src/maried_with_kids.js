@@ -100,15 +100,6 @@ const object_status = [
                 "country": "Canada",
                 "city": "Mississauga",
                 "province": "Ontario"
-            },
-             "3": {
-                "id": 3,
-                "firstName": "Abrahaam",
-                "lastName": "Doe",
-                "relative": "Brother",
-                "country": "Canada",
-                "city": "Guatemala",
-                "province": "Guatemala"
             }
         }
     },

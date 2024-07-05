@@ -23,8 +23,7 @@ var Article = React.forwardRef(function Article(props, ref,) {
         var relatives = Object.values(statusObject.relatives);
         var executors = Object.values(statusObject.executors);
         var bequests = Object.values(statusObject.bequests).filter(item => typeof item === 'object');
-        var trusting = Object.values(statusObject.trusting).filter(item => typeof item === 'object')
-        var trusting = statusObject.trusting
+        var trusting = Object.values(statusObject.trusting).filter(item => typeof item === 'object');
         var residueInfo = statusObject.residue;
         var wipeoutInfo = statusObject.wipeout;
         var guardians = statusObject.guardians;
@@ -103,8 +102,14 @@ var Article = React.forwardRef(function Article(props, ref,) {
                         ) : (
                             <li>No Executors appointed for this Will. The lawyer will act as the Executor.</li>
                         )}
+                        {executors.length > 0 && (
+                            <li>
+                                If {capitalLetters(executors[executors.length - 1].firstName)} {capitalLetters(executors[executors.length - 1].lastName)} should refuse or be unable to act or continue to act as my Executor, then I appoint Lawyers and Lattes Professional Corporation or any successor law firm as the sole Executor of this my Will.
+                            </li>
+                        )}
                         <li>No bond or other security of any kind will be required of any Executor appointed in this my Will.</li>
                     </ol>
+
                 </ol>
                 <p><strong><u>Powers of my Executor</u></strong></p>
                 <ol>
@@ -157,16 +162,7 @@ var Article = React.forwardRef(function Article(props, ref,) {
                                 invested, pay the income or capital or as much of either or both as my Executor considers advisable for
                                 the maintenance, education, advancement or benefit of such beneficiary and to pay or transfer the
                                 capital of such share or the amount remaining of that share to such beneficiary when they reach the age
-                                of {trustingInf['0'].age} years or, prior to such beneficiary reaching the age of {trustingInfo['0'].age} years, to pay or transfer such share to
-                                any parent or guardian of such beneficiary subject to like conditions and the receipt of any such parent
-                                or guardian discharges my Executor. The shares shall be distributed as follows:
-                                {trusting.map((trust, index) => (
-                                    <span key={trust.id}>
-                                        {index > 0 && ', '}
-                                        {trust.shares}% to the beneficiary when they reach the age of {trust.age}
-                                    </span>
-                                ))}
-                                .
+
                             </li>
                             <li>
                                 When my Executor administers my estate, my Executor may convert my estate or any part of my estate into
@@ -196,21 +192,30 @@ var Article = React.forwardRef(function Article(props, ref,) {
                                     property given under this Will is subject to any encumbrances or liens attached to the property. My specific
                                     bequests are as follows:
                                 </li>
-                                {bequests.map((item, index) => (
-                                    <li key={index}>
-                                        I leave {item.shares}% of {item.bequest} to {item.names}, if they shall survive me, for their own use absolutely.
-                                    </li>))}
-                            </>)
-                            : (
-                                <li>
-                                    No bequests added to Will
-                                </li>)
+                                {bequests.map((item, index) => {
+                                    // Encontrar la información del beneficiario    
+                                    let beneficiary = relatives.find(rel => rel.firstName + ' ' + rel.lastName === item.names) ||
+                                        kids.find(kid => kid.firstName + ' ' + kid.lastName === item.names) ||
+                                        (spouseInfo.firstName + ' ' + spouseInfo.lastName === item.names ? spouseInfo : null);
 
-                        }
-                        <p>
-                            NOTE: Should add bequest's country?
-                        </p>
+                                    // Si se encontró el beneficiario, obtener su ciudad y país
+                                    let city = beneficiary ? beneficiary.city : '';
+                                    let country = beneficiary ? beneficiary.country : '';
+
+                                    return (
+                                        <li key={index}>
+                                            I leave {item.shares}% of {item.bequest} to {item.names} of {city}, {country}, if they shall survive me, for their own use absolutely.
+                                        </li>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <li>
+                                No bequests added to Will
+                            </li>
+                        )}
                     </ol>
+
                 </ol><p><strong><u>Distribution of Residue</u></strong></p><p>&nbsp;</p><ol>
                     <ol>
                         <li>To receive any gift or property under this Will a beneficiary must survive me for thirty days.</li>
