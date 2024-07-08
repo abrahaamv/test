@@ -5,7 +5,6 @@ import 'react-quill/dist/quill.snow.css';
 import Article from './Article';
 import object_status from './maried_with_kids';
 
-
 const WillEditor = ({ object_status, onSave }) => {
   const [editorContent, setEditorContent] = useState('');
 
@@ -48,12 +47,27 @@ const WillEditor = ({ object_status, onSave }) => {
 };
 
 function App() {
-  const handleSaveWill = (content) => {
-    var willDOM = { willDOM: content }
-    object_status.push(willDOM);
-    console.log("object_status:", object_status);
-  };
+  const [willVersions, setWillVersions] = useState({});
 
+  const handleSaveWill = (content) => {
+    const timestamp = new Date().toISOString();
+    const versionNumber = Object.keys(willVersions).length + 1;
+    const newVersion = {
+      [`v${versionNumber}`]: {
+        content: content,
+        timestamp: timestamp
+      }
+    };
+
+    setWillVersions(prevVersions => ({
+      ...prevVersions,
+      ...newVersion
+    }));
+
+    const updatedObjectStatus = [...object_status];
+    updatedObjectStatus.push({ willDOM: { ...willVersions, ...newVersion } });
+    console.log("Updated object_status:", updatedObjectStatus);
+  };
 
   return (
     <>
