@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Article = React.forwardRef(function Article(props, ref,) {
+var WillContent = React.forwardRef(function WillContent(props, ref,) {
     const capitalLetters = (word) => {
         return word.toUpperCase();
     };
@@ -63,7 +63,7 @@ var Article = React.forwardRef(function Article(props, ref,) {
 
     return (
         <div ref={ref}>
-            <>
+            <div className='article-container'>
                 <center ><strong>LAST WILL AND TESTAMENT OF {capitalLetters(personal.fullName)} </strong></center>
                 <p><br /><br />I, {capitalLetters(personal.fullName)}, presently of {capitalLetters(personal.city)} {personal.province ? `, ${capitalLetters(personal.province)}` : ''} declare that this is my Last Will and Testament.<br /><br /></p>
 
@@ -644,9 +644,9 @@ var Article = React.forwardRef(function Article(props, ref,) {
                 </p><center><strong>LAST WILL AND TESTAMENT OF {capitalLetters(personal.fullName)}  </strong></center><p><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /> Prepared by: Lawyers and Lattes Professional
                     Corporation<br /> Toronto, ON<br /> lawyersandlattes.com<br /> docs@lawyersandlattes.com<br />
                     <br /><br /><br /><br />
-                </p></>
+                </p></div>
         </div >
     );
 });
 
-export default Article;
+export default WillContent;

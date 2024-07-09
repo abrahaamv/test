@@ -5,7 +5,6 @@ import { Preview, print } from 'react-html2pdf';
 import { useReactToPrint } from "react-to-print";
 import { Button } from "react-bootstrap";
 import { forwardRef } from 'react';
-import Article from "./Article";
 var render = 0;
 var fullName, spouseName;
 var childs = [];
